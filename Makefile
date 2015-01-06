@@ -177,6 +177,10 @@ ifeq ($(NATIVE), osx)
   CXXFLAGS += -mmacosx-version-min=$(OSX_MIN)
   WARNINGS = -Werror -Wall -Wextra -Wno-switch -Wno-sign-compare -Wno-missing-braces
   ifeq ($(LOCALIZE), 1)
+    ifdef GETTEXT
+      CXXFLAGS += -I$(GETTEXT)/include
+      LDFLAGS += -L$(GETTEXT)/lib
+    endif
     LDFLAGS += -lintl
     ifeq ($(MACPORTS), 1)
       LDFLAGS += -L$(shell ncursesw5-config --libdir)
